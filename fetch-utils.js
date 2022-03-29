@@ -1,5 +1,5 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://zwaquhawqyttxdrcbhxx.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3YXF1aGF3cXl0dHhkcmNiaHh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDc1NTE5ODEsImV4cCI6MTk2MzEyNzk4MX0.FnfsYqPR7GPz5COh7itHiDt6as7-F__iU57NyG7IKyE';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -15,7 +15,7 @@ export function checkAuth() {
 
 export function redirectIfLoggedIn() {
     if (getUser()) {
-        location.replace('./other-page');
+        location.replace('./shopping'); //updated so that i can be logged in 
     }
 }
 
@@ -40,3 +40,45 @@ export async function logout() {
 // function checkError({ data, error }) {
 //     return error ? console.error(error) : data;
 // }
+
+//
+export async function getItems() {
+    const response = await client
+        .from('shopping_lists')
+        .select('*');
+    return response.body;
+
+}
+
+
+export async function deleteAllItems() {
+    const user = getUser();
+
+    console.log(user); // why do we need to console log? 
+    const response = await client
+        .from('shopping_lists')
+        .delete()
+        .match({ user_id:user.id }); //left side is supabase column // right side is 
+
+    return response.body;
+}
+
+export async function createItem(shoppingListItem) {
+    const response = await client
+        .from('shopping_lists')
+        .insert(shoppingListItem);
+
+    return response.body; //what does this do 
+}
+
+export async function buyItem(id) {
+    // change item from 
+    const response = await client
+        .from('shopping_lists')
+        .update ({ bought: true })
+        .match({ id });
+        
+    return response.body;
+
+}
+

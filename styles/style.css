@@ -129,3 +129,15 @@ footer {
 .auth-container button {
     margin: 10px;
 }
+
+form {
+    text-align: center;
+    background-color:azure;
+    font-size: medium; /* how come this isnt working?*/ 
+    color:green /* but this one is*/ 
+    
+}
+
+#new-shopping-list-item{
+background-color: yellow;
+}
