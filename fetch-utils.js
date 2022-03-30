@@ -76,8 +76,8 @@ export async function buyItem(id) {
     const response = await client
         .from('shopping_lists')
         .update ({ bought: true })
-        .match({ id });
-        
+        .match({ id }); //where is id coming from? because its not the column 
+
     return response.body;
 
 }
