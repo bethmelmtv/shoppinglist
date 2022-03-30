@@ -12,6 +12,8 @@ export function renderItem(shoppingItem) {
     } else {
         shoppingListItemEl.classList.add('not-done');
     }
+    //clear
+    
 
 
     shoppingListItemEl.textContent = shoppingItem.amount;
